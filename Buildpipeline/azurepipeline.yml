@@ -97,8 +97,15 @@ steps:
     command: 'pack'
     packagesToPack: '**/Microcharts.Forms.Nuspec'
     packDirectory: '$(Build.ArtifactStagingDirectory)'
-    #buildProperties: 'SymbolPackageFormat=snupkg'
+    buildProperties: 'SymbolPackageFormat=snupkg'
 
+- task: NuGetCommand@2
+  displayName: "Restore Microchart.Droid packages"
+  inputs:
+    command: 'restore'
+    restoreSolution: 'Microcharts.Droid/packages.config'
+    feedsToUse: 'select'
+    restoreDirectory: '../../packages/'
 
 - task: XamarinAndroid@1
   displayName: 'Build Microchart.Droid'

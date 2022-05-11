@@ -89,7 +89,7 @@ steps:
   inputs:
     command: 'restore'
     projects: '**/Microcharts.Droid.csproj'
-    restoreDirectory: '$(system.defaultworkingdirectory)'S
+    restoreDirectory: '$(system.defaultworkingdirectory)'
 
 - task: DotNetCoreCLI@2  
   displayName: 'Build Forms NuGet package'

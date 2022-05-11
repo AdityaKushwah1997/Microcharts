@@ -84,12 +84,13 @@ steps:
   displayName: 'Updating xcode version'
 
 
-# - task: DotNetCoreCLI@2
-#   displayName: "Restore Nuget package"
-#   inputs:
-#     command: 'restore'
-#     projects: '**/Microcharts.Droid.csproj'
-#     restoreDirectory: '$(system.defaultworkingdirectory)'
+- task: NuGetCommand@2
+  displayName: "Restore Microcharts.Forms packages"
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/Microcharts.Forms/packages.config'
+    feedsToUse: 'select'
+    restoreDirectory: '../../packages/'
 
 - task: NuGetCommand@2  
   displayName: 'Build Microchart.Forms NuGet package'
@@ -103,7 +104,7 @@ steps:
   displayName: "Restore Microchart.Droid packages"
   inputs:
     command: 'restore'
-    restoreSolution: 'Microcharts.Droid/packages.config'
+    restoreSolution: '**/Microcharts.Droid/packages.config'
     feedsToUse: 'select'
     restoreDirectory: '../../packages/'
 

@@ -84,20 +84,20 @@ steps:
   displayName: 'Updating xcode version'
 
 
-- task: DotNetCoreCLI@2
-  displayName: "Restore Nuget package"
-  inputs:
-    command: 'restore'
-    projects: '**/Microcharts.Droid.csproj'
-    restoreDirectory: '$(system.defaultworkingdirectory)'
+# - task: DotNetCoreCLI@2
+#   displayName: "Restore Nuget package"
+#   inputs:
+#     command: 'restore'
+#     projects: '**/Microcharts.Droid.csproj'
+#     restoreDirectory: '$(system.defaultworkingdirectory)'
 
 - task: NuGetCommand@2  
   displayName: 'Build Microchart.Forms NuGet package'
   inputs:
     command: 'pack'
-    packagesToPack: '**/Microcharts.Forms.Nuspec'
+    packagesToPack: '**/Microcharts.Forms.nuspec'
     packDirectory: '$(Build.ArtifactStagingDirectory)'
-    buildProperties: 'SymbolPackageFormat=snupkg'
+    buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
 - task: NuGetCommand@2
   displayName: "Restore Microchart.Droid packages"
@@ -125,7 +125,7 @@ steps:
     packagesToPack: '**/Microcharts.Core.nuspec'
     configuration: '$(buildConfiguration)'
     versioningScheme: 'off'
-    buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'    
+    buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
 - task: PublishBuildArtifacts@1
   displayName: "Publish Nuget packages"

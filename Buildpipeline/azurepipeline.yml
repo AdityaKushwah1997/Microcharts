@@ -91,25 +91,34 @@ steps:
     projects: '**/Microcharts.Droid.csproj'
     restoreDirectory: '$(system.defaultworkingdirectory)'
 
-- task: DotNetCoreCLI@2  
-  displayName: 'Build Forms NuGet package'
+- task: NuGetCommand@2  
+  displayName: 'Build Microchart.Forms NuGet package'
   inputs:
     command: 'pack'
-    packagesToPack: '**/Microcharts.Forms.csproj'
+    packagesToPack: '**/Microcharts.Forms.Nuspec'
     packDirectory: '$(Build.ArtifactStagingDirectory)'
-    buildProperties: 'SymbolPackageFormat=snupkg'
+    #buildProperties: 'SymbolPackageFormat=snupkg'
 
 
 - task: XamarinAndroid@1
-  displayName: 'Build Core NuGet package'
+  displayName: 'Build Microchart.Droid'
   inputs:
     projectFile: '**/Microcharts.Droid.csproj'
     outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
     configuration: '$(buildConfiguration)'
-    msbuildVersionOption: latest
-    jdkVersionOption: 1.8
-    clean: true
-    buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
+    createAppPackage: false
+    jdkOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    
+
+- task: NuGetCommand@2
+  displayName: "Create Microcharts.Droid Nuget package"
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/Microcharts.Core.nuspec'
+    configuration: '$(buildConfiguration)'
+    versioningScheme: 'off'
+    buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'    
 
 - task: PublishBuildArtifacts@1
   displayName: "Publish Nuget packages"
@@ -124,4 +133,4 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: '07581f72-b7dd-40bc-8318-ae6650290111'
-
+    allowPackageConflicts: 'true'

@@ -109,6 +109,7 @@ steps:
     msbuildVersionOption: latest
     jdkVersionOption: 1.8
     clean: true
+    buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
 - task: PublishBuildArtifacts@1
   displayName: "Publish Nuget packages"

@@ -107,7 +107,6 @@ steps:
     packagesToPack: '**/Microcharts.Forms.nuspec'
     configuration: 'Release'
     versioningScheme: 'off'
-    #packDirectory: '$(Build.ArtifactStagingDirectory)'
     buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
 
@@ -123,8 +122,8 @@ steps:
   displayName: 'Build Microchart.Droid'
   inputs:
     projectFile: '**/Microcharts.Droid.csproj'
-    outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
-    configuration: '$(buildConfiguration)'
+    #outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
+    configuration: 'Release'
     createAppPackage: false
     jdkOption: 'JDKVersion'
     jdkVersionOption: '1.8'

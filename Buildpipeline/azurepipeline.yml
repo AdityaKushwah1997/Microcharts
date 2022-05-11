@@ -16,7 +16,7 @@ variables:
   MyVersion: '$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaData)'
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'macOS-11'
   demands:
   - xcode
   - Xamarin.iOS

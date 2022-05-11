@@ -27,13 +27,6 @@ pool:
 name: _WAKA_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)
 
 steps:
-# - task: UseGitVersion@5
-#   displayName: gitversion
-#   inputs:
-#     versionSpec: '5.x'
-#     updateAssemblyInfo: false
-#     #https://github.com/GitTools/GitVersion/issues/2225
-
 
 - task: NuGetToolInstaller@1
   inputs:
@@ -91,42 +84,25 @@ steps:
   displayName: 'Updating xcode version'
 
 
+- task: DotNetCoreCLI@2
+  displayName: "Restore Nuget package"
+  inputs:
+    command: 'restore'
+    projects: '**/Microcharts.Droid.csproj'
+    restoreDirectory: '$(system.defaultworkingdirectory)'S
 
 - task: DotNetCoreCLI@2  
-  displayName: 'Create Forms NuGet package'
+  displayName: 'Build Forms NuGet package'
   inputs:
     command: 'pack'
     packagesToPack: '**/Microcharts.Forms.csproj'
     packDirectory: '$(Build.ArtifactStagingDirectory)'
     buildProperties: 'SymbolPackageFormat=snupkg'
 
-- task: DotNetCoreCLI@2
-  displayName: "Restore Core Nuget package"
-  inputs:
-    command: 'restore'
-    projects: '**/Microcharts.Droid.csproj'
-    restoreDirectory: '$(system.defaultworkingdirectory)'
-
-# - task: NuGetCommand@2
-#   displayName: "Nuget package"
-#   inputs:
-#       command: 'pack'
-#       packagesToPack: '**/Microcharts.Core.nuspec'
-#       #configuration: 'Release'
-#       packDirectory: '$(Build.ArtifactStagingDirectory)'
-#       buildProperties: 'SymbolPackageFormat=snupkg'
-
-# - task: DotNetCoreCLI@2
-#   displayName: "Build BD.Common.Mobile"
-#   inputs:
-#     command: 'build'
-#     projects: '**/Microcharts.Droid.csproj'
-#     arguments: '--configuration Release'
 
 - task: XamarinAndroid@1
   displayName: 'Build Core NuGet package'
   inputs:
-    
     projectFile: '**/Microcharts.Droid.csproj'
     outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
     configuration: '$(buildConfiguration)'
@@ -135,6 +111,7 @@ steps:
     clean: true
 
 - task: PublishBuildArtifacts@1
+  displayName: "Publish Nuget packages"
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
 

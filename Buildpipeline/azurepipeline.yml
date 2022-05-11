@@ -26,7 +26,7 @@ pool:
 
 name: _WAKA_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)
 
- steps:
+steps:
 # - task: UseGitVersion@5
 #   displayName: gitversion
 #   inputs:

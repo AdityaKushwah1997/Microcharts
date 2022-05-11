@@ -92,13 +92,13 @@ steps:
 
 
 
-# - task: DotNetCoreCLI@2  
-#   displayName: 'Create Forms NuGet package'
-#   inputs:
-#     command: 'pack'
-#     packagesToPack: '**/Microcharts.Forms.csproj'
-#     packDirectory: '$(Build.ArtifactStagingDirectory)'
-#     buildProperties: 'SymbolPackageFormat=snupkg'
+- task: DotNetCoreCLI@2  
+  displayName: 'Create Forms NuGet package'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/Microcharts.Forms.csproj'
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
+    buildProperties: 'SymbolPackageFormat=snupkg'
 
 - task: DotNetCoreCLI@2
   displayName: "Restore Core Nuget package"

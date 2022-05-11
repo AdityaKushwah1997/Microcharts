@@ -43,7 +43,7 @@ steps:
   inputs:
     command: 'restore'
     projects: '**/Microcharts.Droid.csproj'
-    restoreDirectory: '../../packages/'
+    restoreDirectory: '$(system.defaultworkingdirectory)'
 
 # - task: NuGetCommand@2
 #   displayName: "Nuget package"
@@ -67,7 +67,9 @@ steps:
     
     projectFile: '**/Microcharts.Droid.csproj'
     outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
-    configuration: '$(BuildConfiguration)'
+    configuration: '$(buildConfiguration)'
+    msbuildVersionOption: latest
+    jdkVersionOption: 1.8
     clean: true
 
 - task: PublishBuildArtifacts@1

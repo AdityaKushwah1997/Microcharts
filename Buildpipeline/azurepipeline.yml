@@ -109,12 +109,11 @@ steps:
 #     versioningScheme: 'off'
 #     buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: "Restore Microcharts packages"
   inputs:
     command: 'restore'
-    restoreSolution: '**/Microcharts/packages.config'
-    feedsToUse: 'select'
+    projects: '**/Microcharts.csproj'
     restoreDirectory: '../../packages/'
 
 - task: DotNetCoreCLI@2

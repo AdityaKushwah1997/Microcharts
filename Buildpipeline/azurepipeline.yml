@@ -136,9 +136,8 @@ steps:
   displayName: 'Build Microchart.Droid'
   inputs:
     projectFile: '**/Microcharts.Droid.csproj'
-    outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
+    #outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
     configuration: 'Release'
-    msbuildVersionOption: latest
     jdkOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     

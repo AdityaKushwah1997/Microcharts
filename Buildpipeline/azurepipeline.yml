@@ -146,6 +146,7 @@ steps:
     createAppPackage: false
     jdkOption: 'JDKVersion'
     jdkVersionOption: '1.8'
+    msbuildVersionOption: '15.0'
     
 
 - task: NuGetCommand@2

@@ -84,34 +84,34 @@ steps:
   displayName: 'Updating xcode version'
 
 
-# - task: DotNetCoreCLI@2
-#   displayName: "Restore Microcharts.Forms packages"
-#   inputs:
-#     command: 'restore'
-#     projects: '**/Microcharts.Forms.csproj'
-#     restoreDirectory: '../../packages/'
+- task: DotNetCoreCLI@2
+  displayName: "Restore Microcharts.Forms packages"
+  inputs:
+    command: 'restore'
+    projects: '**/Microcharts.Forms.csproj'
+    restoreDirectory: '../../packages/'
 
 
-# - task: DotNetCoreCLI@2
-#   displayName: "Build Microcharts.Forms packages"
-#   inputs:
-#     command: 'build'
-#     projects: '**/Microcharts.Forms.csproj'
-#     arguments: '--configuration Release'    
+- task: DotNetCoreCLI@2
+  displayName: "Build Microcharts.Forms package"
+  inputs:
+    command: 'build'
+    projects: '**/Microcharts.Forms.csproj'
+    arguments: '--configuration Release'    
 
 
-# - task: NuGetCommand@2  
-#   displayName: 'Create Microchart.Forms NuGet package'
-#   inputs:
-#     command: 'pack'
-#     packagesToPack: '**/Microcharts.Forms.nuspec'
-#     configuration: 'Release'
-#     versioningScheme: 'off'
-#     buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
+- task: NuGetCommand@2  
+  displayName: 'Create Microchart.Forms NuGet package'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/Microcharts.Forms.nuspec'
+    configuration: 'Release'
+    versioningScheme: 'off'
+    buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
 
 - task: MSBuild@1
-  displayName: "Restore msbuild packages"
+  displayName: "Restore Microcharts.Droid packages"
   inputs:
     msbuildArguments: /t:restore
     solution: '**/Microcharts.sln'
@@ -119,7 +119,7 @@ steps:
     restoreNugetPackages: true
 
 - task: XamarinAndroid@1
-  displayName: 'Build Microchart.Droid packages'
+  displayName: 'Build Microchart.Droid package'
   inputs:
     projectFile: '**/Microcharts.Droid.csproj'
     configuration: 'Release'

@@ -109,6 +109,7 @@ steps:
 #     versioningScheme: 'off'
 #     buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
+
 - task: DotNetCoreCLI@2
   displayName: "Restore Microcharts packages"
   inputs:
@@ -121,8 +122,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/Microcharts.csproj'
-    arguments: '--configuration Release'
-
+    arguments: '--configuration Release'    
 
 - task: NuGetCommand@2
   displayName: "Restore Microcharts.Droid packages"
@@ -141,7 +141,6 @@ steps:
     msbuildVersionOption: latest
     jdkOption: 'JDKVersion'
     jdkVersionOption: '1.8'
-    clean: true
     
 
 - task: NuGetCommand@2

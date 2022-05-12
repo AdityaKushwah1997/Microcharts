@@ -134,9 +134,9 @@ steps:
   displayName: "Restore Microcharts.Droid packages"
   inputs:
     command: 'restore'
-    restoreSolution: '**/Microcharts.Droid/packages.config'
-    feedsToUse: 'select'
-    restoreDirectory: '../../'
+    restoreSolution: '**/Microcharts.sln'
+    #feedsToUse: 'select'
+    restoreDirectory: '../../packages/'
 
 - task: XamarinAndroid@1
   displayName: 'Build Microchart.Droid packages'

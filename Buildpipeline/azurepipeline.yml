@@ -110,6 +110,9 @@ steps:
 #     buildProperties: 'version=$(GitVersion.MajorMinorPatch)-$(GitVersion.EscapedBranchName)-$(GitVersion.BuildMetaDataPadded)'
 
 
+
+
+
 - task: DotNetCoreCLI@2
   displayName: "Restore Microcharts packages"
   inputs:
@@ -124,13 +127,16 @@ steps:
     projects: '**/Microcharts.csproj'
     arguments: '--configuration Release'
 
+
+
+
 - task: NuGetCommand@2
   displayName: "Restore Microcharts.Droid packages"
   inputs:
     command: 'restore'
     restoreSolution: '**/Microcharts.Droid/packages.config'
     feedsToUse: 'select'
-    restoreDirectory: '../../packages/'
+    restoreDirectory: '../../'
 
 - task: XamarinAndroid@1
   displayName: 'Build Microchart.Droid packages'

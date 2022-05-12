@@ -62,7 +62,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\..\packages\SkiaSharp.2.80.3\build\monoandroid90\SkiaSharp.targets" Condition="Exists('..\..\packages\SkiaSharp.2.80.3\build\monoandroid10.0\SkiaSharp.targets')" />
-  <Import Project="..\..\packages\SkiaSharp.Views.2.80.3\build\monoandroid90\SkiaSharp.Views.targets" Condition="Exists('..\..\packages\SkiaSharp.Views.2.80.3\build\monoandroid10.0\SkiaSharp.Views.targets')" />
+  <Import Project="..\..\packages\SkiaSharp.2.80.3\build\monoandroid910.0\SkiaSharp.targets" Condition="Exists('..\..\packages\SkiaSharp.2.80.3\build\monoandroid10.0\SkiaSharp.targets')" />
+  <Import Project="..\..\packages\SkiaSharp.Views.2.80.3\build\monoandroid10.0\SkiaSharp.Views.targets" Condition="Exists('..\..\packages\SkiaSharp.Views.2.80.3\build\monoandroid10.0\SkiaSharp.Views.targets')" />
 
 </Project>

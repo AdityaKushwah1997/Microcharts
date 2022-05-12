@@ -123,26 +123,20 @@ steps:
     projects: '**/Microcharts.csproj'
     arguments: '--configuration Release'
 
-- task: DotNetCoreCLI@2
+
+- task: NuGetCommand@2
   displayName: "Restore Microcharts.Droid packages"
   inputs:
     command: 'restore'
-    projects: '**/Microcharts.Droid.csproj'
+    restoreSolution: '**/Microcharts.Droid/packages.config'
+    feedsToUse: 'select'
     restoreDirectory: '../../packages/'
-
-# - task: NuGetCommand@2
-#   displayName: "Restore Microcharts.Droid packages"
-#   inputs:
-#     command: 'restore'
-#     restoreSolution: '**/Microcharts.Droid/packages.config'
-#     feedsToUse: 'select'
-#     restoreDirectory: '../../packages/'
 
 - task: XamarinAndroid@1
   displayName: 'Build Microchart.Droid'
   inputs:
     projectFile: '**/Microcharts.Droid.csproj'
-    #outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
+    outputDirectory: '$(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
     configuration: 'Release'
     createAppPackage: false
     jdkOption: 'JDKVersion'
